@@ -1,0 +1,26 @@
+create table employee
+ (  emp_id int primary key,
+   firstname varchar(20) ,
+   lastname varchar(20) ,
+   department varchar(20) );
+
+insert into employee values(1,'Ruksha','Dahal' ,'IT');
+insert into employee values(2,'Bella','Dahal' ,'HIT');
+insert into employee values(3,'fella','Dahal' ,'IIT');
+
+select * from employee;
+
+declare
+ cursor emp_cur is( select emp_id,firstname,lastname,department 
+ from employee
+ where emp_id in(1,2));
+
+begin
+ for emp_rec in emp_cur
+  loop
+  update employee
+   set lastname='Hello'
+   where emp_id =emp_rec.emp_id;
+ end loop;
+commit;
+end;
